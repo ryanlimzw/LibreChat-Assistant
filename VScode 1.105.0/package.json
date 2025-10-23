@@ -1,0 +1,157 @@
+{
+  "name": "librechat-assistant",
+  "displayName": "LibreChat Assistant",
+  "description": "AI coding assistant powered by LibreChat Enterprise",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.105.0"
+  },
+  "categories": [
+    "Other",
+    "Programming Languages",
+    "Snippets"
+  ],
+  "activationEvents": [
+    "onCommand:librechat.openChat",
+    "onCommand:librechat.explainCode",
+    "onCommand:librechat.debugCode",
+    "onCommand:librechat.optimizeCode",
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:python",
+    "onLanguage:java",
+    "onLanguage:cpp",
+    "onLanguage:csharp"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "librechat.openChat",
+        "title": "Open LibreChat",
+        "category": "LibreChat",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "librechat.explainCode",
+        "title": "Explain this code",
+        "category": "LibreChat",
+        "icon": "$(question)"
+      },
+      {
+        "command": "librechat.debugCode",
+        "title": "Debug this code",
+        "category": "LibreChat",
+        "icon": "$(debug)"
+      },
+      {
+        "command": "librechat.optimizeCode",
+        "title": "Optimize this code",
+        "category": "LibreChat",
+        "icon": "$(rocket)"
+      }
+    ],
+    "menus": {
+      "command-palette": [
+        {
+          "command": "librechat.openChat"
+        },
+        {
+          "command": "librechat.explainCode"
+        },
+        {
+          "command": "librechat.debugCode"
+        },
+        {
+          "command": "librechat.optimizeCode"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "librechat.explainCode",
+          "group": "LibreChat",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "librechat.debugCode",
+          "group": "LibreChat",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "librechat.optimizeCode",
+          "group": "LibreChat",
+          "when": "editorHasSelection"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "LibreChat Assistant",
+      "properties": {
+        "librechatAssistant.apiUrl": {
+          "type": "string",
+          "default": "https://your-librechat-instance.com",
+          "description": "LibreChat Enterprise API URL"
+        },
+        "librechatAssistant.apiKey": {
+          "type": "string",
+          "description": "API Key for LibreChat Enterprise",
+          "scope": "application"
+        },
+        "librechatAssistant.autoAttachContext": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically attach current file context to messages"
+        },
+        "librechatAssistant.maxContextLines": {
+          "type": "number",
+          "default": 50,
+          "description": "Maximum number of lines to include from current file"
+        },
+        "librechatAssistant.enableInlineCompletions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable inline code completions (Copilot-like)"
+        }
+      }
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "librechat-assistant",
+          "name": "LibreChat Assistant",
+          "type": "webview"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.105.0",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/librechat-assistant"
+  },
+  "publisher": "your-name",
+  "keywords": [
+    "ai",
+    "assistant",
+    "librechat",
+    "coding",
+    "completion",
+    "debugging"
+  ]
+}
